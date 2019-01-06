@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     context: __dirname,
     entry: './src/index.js',
@@ -12,13 +14,13 @@ module.exports = {
                     plugins: [
                         '@babel/plugin-syntax-dynamic-import',
                     ],
-                }
+                },
             },
-        ]
+        ],
     },
     output: {
-        path: __dirname + '/build/',
+        path: path.join(__dirname, 'build'),
         publicPath: '/build/',
-        filename: 'distro.min.js'
+        filename: 'distro.min.js',
     },
 };
