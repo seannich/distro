@@ -8,11 +8,10 @@ function toCORSProxyURL(URL) {
     return `https://cors.io/?${URL}`;
 }
 
-function getProjectConfig(projectURL) {
-    const url = toCORSProxyURL(`${projectURL}${PROJECT_CONFIG_SUFFIX}`);
-
-    return axios.get(url, {
+function fetchWebRPC(URL, options) {
+    return axios.get(URL, {
         crossDomain: true,
+        ...options,
     }).then(response => new Promise((resolve, reject) => {
         if (response.status === 200) {
             // The response data is XML. Parse the XML into a JavaScript object
@@ -24,18 +23,12 @@ function getProjectConfig(projectURL) {
     }));
 }
 
-function getServerStatus(projectURL) {
-    const url = toCORSProxyURL(`${projectURL}${SERVER_STATUS_SUFFIX}`);
+function getProjectConfig(projectURL) {
+    const URL = toCORSProxyURL(`${projectURL}${PROJECT_CONFIG_SUFFIX}`);
+    return fetchWebRPC(URL);
+}
 
-    return axios.get(url, {
-        crossDomain: true,
-    }).then(response => new Promise((resolve, reject) => {
-        if (response.status === 200) {
-            // The response data is XML. Parse the XML into a JavaScript object
-            const data = parser.parse(response.data);
-            resolve(data);
-        } else {
-            reject(response);
-        }
-    }));
+function getServerStatus(projectURL) {
+    const URL = toCORSProxyURL(`${projectURL}${SERVER_STATUS_SUFFIX}`);
+    return fetchWebRPC(URL);
 }
