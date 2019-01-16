@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 module.exports = {
     context: __dirname,
@@ -10,10 +11,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env'],
-                    plugins: [
-                        '@babel/plugin-syntax-dynamic-import',
-                    ],
+                    ...JSON.parse(fs.readFileSync('.babelrc')),
                 },
             },
         ],
