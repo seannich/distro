@@ -23,12 +23,12 @@ function fetchWebRPC(URL, options) {
     }));
 }
 
-function getProjectConfig(projectURL) {
+export function getProjectConfig(projectURL) {
     const URL = toCORSProxyURL(`${projectURL}${PROJECT_CONFIG_SUFFIX}`);
     return fetchWebRPC(URL);
 }
 
-function getServerStatus(projectURL) {
+export function getServerStatus(projectURL) {
     const URL = toCORSProxyURL(`${projectURL}${SERVER_STATUS_SUFFIX}`);
     return fetchWebRPC(URL);
 }
