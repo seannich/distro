@@ -5,7 +5,8 @@
     "scripts": {
         "webpack": "webpack --config webpack.config.js --mode development",
         "watch": "webpack --config webpack.config.js --mode development --watch",
-        "prod": "webpack --config webpack.config.js --mode production"
+        "prod": "webpack --config webpack.config.js --mode production",
+        "test": "jest"
     },
     "repository": "git@github.com:seannich/distro.git",
     "authors": [
