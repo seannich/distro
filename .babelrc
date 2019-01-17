@@ -2,8 +2,11 @@
     "presets": ["@babel/preset-env"],
     "plugins": [
         "@babel/plugin-syntax-dynamic-import",
-        ["module-resolver", {
-            "root": ["./src"]
-        }]
+        "@babel/plugin-transform-runtime",
+        [
+            "module-resolver", {
+                "root": ["./src"]
+            }
+        ]
     ]
 }
