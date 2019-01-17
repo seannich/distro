@@ -2,5 +2,15 @@
     "extends": "airbnb-base",
     "rules": {
         "indent": ["error", 4]
+    },
+    "env": {
+        "jest": true
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {
+                "root": ["./src"]
+            }
+        }
     }
 }
