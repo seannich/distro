@@ -1,17 +1,24 @@
 import axios from 'axios';
 import parser from 'fast-xml-parser';
+import queryString from 'query-string';
 
 const PROJECT_CONFIG_SUFFIX = 'get_project_config.php';
-const SERVER_STATUS_SUFFIX = 'server_status.php?xml=1';
+const SERVER_STATUS_SUFFIX = 'server_status.php';
 
-function toCORSProxyURL(URL) {
-    return `https://cors.io/?${URL}`;
+function constructURL(URL, params) {
+    return `${URL}?${queryString.stringify(params)}`;
 }
 
-function fetchWebRPC(URL, options) {
+function toCORSProxyURL(URL, params) {
+    return `https://cors.io/?${constructURL(URL, params)}`;
+}
+
+function fetchWebRPC(projectEndpoint, params, requestOptions) {
+    const URL = toCORSProxyURL(projectEndpoint, params);
+
     return axios.get(URL, {
         crossDomain: true,
-        ...options,
+        ...requestOptions,
     }).then(response => new Promise((resolve, reject) => {
         if (response.status === 200) {
             // The response data is XML. Parse the XML into a JavaScript object
@@ -24,11 +31,11 @@ function fetchWebRPC(URL, options) {
 }
 
 export function getProjectConfig(projectURL) {
-    const URL = toCORSProxyURL(`${projectURL}${PROJECT_CONFIG_SUFFIX}`);
-    return fetchWebRPC(URL);
+    const endpoint = `${projectURL}${PROJECT_CONFIG_SUFFIX}`;
+    return fetchWebRPC(endpoint);
 }
 
 export function getServerStatus(projectURL) {
-    const URL = toCORSProxyURL(`${projectURL}${SERVER_STATUS_SUFFIX}`);
-    return fetchWebRPC(URL);
+    const endpoint = `${projectURL}${SERVER_STATUS_SUFFIX}`;
+    return fetchWebRPC(endpoint, { xml: 1 });
 }
