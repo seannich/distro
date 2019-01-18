@@ -43,6 +43,7 @@
     "dependencies": {
         "axios": "^0.18.0",
         "fast-xml-parser": "^3.12.12",
+        "md5": "^2.2.1",
         "query-string": "^6.2.0"
     }
 }

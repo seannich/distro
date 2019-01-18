@@ -1,6 +1,7 @@
 import axios from 'axios';
 import parser from 'fast-xml-parser';
 import queryString from 'query-string';
+import md5 from 'md5';
 
 const PROJECT_CONFIG_SUFFIX = 'get_project_config.php';
 const SERVER_STATUS_SUFFIX = 'server_status.php';
@@ -26,6 +27,11 @@ function constructURL(URL, params) {
 
 function toCORSProxyURL(URL, params) {
     return `https://cors.io/?${constructURL(URL, params)}`;
+}
+
+function createPasswdHash(password, email) {
+    // As documented in: https://boinc.berkeley.edu/trac/wiki/PasswordHash
+    return md5(password + email);
 }
 
 function fetchWebRPC(projectEndpoint, params, requestOptions) {
@@ -55,7 +61,9 @@ export function getServerStatus(projectURL) {
     return fetchWebRPC(endpoint, { xml: 1 });
 }
 
-export function createAccount(projectURL, emailAddress, passwdHash, userName, options) {
+export function createAccount(projectURL, emailAddress, password, userName, options) {
+    const passwdHash = createPasswdHash(password, emailAddress);
+
     const endpoint = `${projectURL}${CREATE_ACCOUNT_SUFFIX}`;
     const params = {
         email_addr: emailAddress,
