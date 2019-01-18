@@ -30,37 +30,6 @@ export function fetchWebRPC(projectEndpoint, params, requestOptions) {
     }));
 }
 
-export function teamLookupByName(projectURL, teamName) {
-    const endpoint = `${projectURL}${TEAM_LOOKUP_SUFFIX}`;
-    const params = {
-        format: 'xml',
-        team_name: teamName,
-    };
-
-    return fetchWebRPC(endpoint, params);
-}
-
-export function teamLookupByID(projectURL, teamID) {
-    const endpoint = `${projectURL}${TEAM_LOOKUP_SUFFIX}`;
-    const params = {
-        team_id: teamID,
-    };
-
-    return fetchWebRPC(endpoint, params);
-}
-
-export function getTeamMemberList(projectURL, teamID, opaqueAuth, options) {
-    const endpoint = `${projectURL}${TEAM_MEMBER_LIST_SUFFIX}`;
-    const params = {
-        xml: 1,
-        teamid: teamID,
-        opaque_auth: opaqueAuth,
-        ...options,
-    };
-
-    return fetchWebRPC(endpoint, params);
-}
-
 export function setForumPref(projectURL, accountKey, options) {
     const endpoint = `${projectURL}${UPDATE_FORUM_PREF_SUFFIX}`;
     const payload = {
