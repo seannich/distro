@@ -3,21 +3,6 @@ import parser from 'fast-xml-parser';
 import queryString from 'query-string';
 import md5 from 'md5';
 
-const PROJECT_CONFIG_SUFFIX = 'get_project_config.php';
-const SERVER_STATUS_SUFFIX = 'server_status.php';
-const CREATE_ACCOUNT_SUFFIX = 'create_account.php';
-const LOOKUP_ACCOUNT_SUFFIX = 'lookup_account.php';
-const GET_ACCOUNT_INFO_SUFFIX = 'am_get_info.php';
-const SET_ACCOUNT_INFO_SUFFIX = 'am_set_info.php';
-const SET_HOST_INFO_SUFFIX = 'am_set_host_info.php';
-const SHOW_USER_SUFFIX = 'show_user.php';
-const GET_RESULT_STATUS_SUFFIX = 'result_status.php';
-const TEAM_LOOKUP_SUFFIX = 'team_lookup.php';
-const TEAM_MEMBER_LIST_SUFFIX = 'team_email_list.php';
-const UPDATE_FORUM_PREF_SUFFIX = 'edit_forum_preferences_action.php';
-const USER_LAST_FORUM_POST_SUFFIX = 'forum_get_data.php';
-const APP_VERSIONS_SUFFIX = 'apps.php';
-
 export const METHOD_POST_DETAILS = 'user_posts';
 export const METHOD_THREAD_DETAILS = 'user_threads';
 
