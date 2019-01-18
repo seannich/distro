@@ -19,7 +19,7 @@ function createPasswdHash(password, email) {
     return md5(password + email);
 }
 
-function fetchWebRPC(projectEndpoint, params, requestOptions) {
+export function fetchWebRPC(projectEndpoint, params, requestOptions) {
     const URL = toCORSProxyURL(projectEndpoint, params);
 
     return axios.get(URL, {
@@ -34,16 +34,6 @@ function fetchWebRPC(projectEndpoint, params, requestOptions) {
             reject(response);
         }
     }));
-}
-
-export function getProjectConfig(projectURL) {
-    const endpoint = `${projectURL}${PROJECT_CONFIG_SUFFIX}`;
-    return fetchWebRPC(endpoint);
-}
-
-export function getServerStatus(projectURL) {
-    const endpoint = `${projectURL}${SERVER_STATUS_SUFFIX}`;
-    return fetchWebRPC(endpoint, { xml: 1 });
 }
 
 export function createAccount(projectURL, emailAddress, password, userName, options) {
@@ -109,12 +99,6 @@ export function showUser(projectURL, opaqueAuth, options) {
     return fetchWebRPC(endpoint, params);
 }
 
-export function getResultStatus(projectURL, options) {
-    const endpoint = `${projectURL}${GET_RESULT_STATUS_SUFFIX}`;
-
-    return fetchWebRPC(endpoint, options);
-}
-
 export function teamLookupByName(projectURL, teamName) {
     const endpoint = `${projectURL}${TEAM_LOOKUP_SUFFIX}`;
     const params = {
@@ -165,9 +149,4 @@ export function getForumLastPost(projectURL, method, userID, options) {
     };
 
     return fetchWebRPC(endpoint, params);
-}
-
-export function getAppVersions(projectURL) {
-    const endpoint = `${projectURL}${APP_VERSIONS_SUFFIX}`;
-    return fetchWebRPC(endpoint, { xml: 1 });
 }
