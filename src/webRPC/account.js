@@ -12,7 +12,8 @@ function createPasswdHash(password, email) {
     return md5(password + email);
 }
 
-export function createAccount(projectURL, emailAddress, password, userName, options) {
+export function createAccount(projectURL, emailAddress, password, userName,
+    hasConsent, consentSource, options) {
     const passwdHash = createPasswdHash(password, emailAddress);
 
     const endpoint = `${projectURL}${CREATE_ACCOUNT_SUFFIX}`;
@@ -20,6 +21,8 @@ export function createAccount(projectURL, emailAddress, password, userName, opti
         email_addr: emailAddress,
         passwd_hash: passwdHash,
         user_name: userName,
+        consent_flag: hasConsent ? 1 : 0,
+        source: consentSource,
         ...options,
     };
 
