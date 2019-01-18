@@ -1,6 +1,6 @@
 import md5 from 'md5';
 
-import { fetchWebRPC } from './webRPC';
+import fetchWebRPC from './webRPC';
 import {
     CREATE_ACCOUNT_SUFFIX, LOOKUP_ACCOUNT_SUFFIX,
     GET_ACCOUNT_INFO_SUFFIX, SET_ACCOUNT_INFO_SUFFIX,

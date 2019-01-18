@@ -1,4 +1,4 @@
-import { fetchWebRPC } from './webRPC';
+import fetchWebRPC from './webRPC';
 import {
     TEAM_LOOKUP_SUFFIX, TEAM_MEMBER_LIST_SUFFIX,
 } from './settings';

@@ -1,4 +1,4 @@
-import { fetchWebRPC } from './webRPC';
+import fetchWebRPC from './webRPC';
 import {
     PROJECT_CONFIG_SUFFIX, SERVER_STATUS_SUFFIX,
     APP_VERSIONS_SUFFIX, GET_RESULT_STATUS_SUFFIX,
