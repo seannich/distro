@@ -1,0 +1,19 @@
+{
+    "name": "cors-proxy",
+    "version": "1.0.0",
+    "description": "Proxies requests with BOINC to allow CORS",
+    "main": "index.js",
+    "repository": "https://github.com/seannich/distro",
+    "authors": [
+        {
+            "name": "Joel Tio",
+            "email": "joeltiojinhon@gmail.com"
+        },
+        {
+            "name": "Sean Nicholas",
+            "email": "seannts9@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "private": false
+}
