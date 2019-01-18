@@ -1,4 +1,4 @@
-import { getProjectConfig, getServerStatus } from 'webRPC';
+import { getProjectConfig, getServerStatus } from 'webRPC/project';
 
 const testProjectURL = 'http://boinc.thesonntags.com/collatz/';
 
