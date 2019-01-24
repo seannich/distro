@@ -6,8 +6,8 @@ function constructURL(URL, params) {
     return `${URL}?${queryString.stringify(params)}`;
 }
 
-function toCORSProxyURL(URL, params) {
-    return `https://cors.io/?${constructURL(URL, params)}`;
+export function toCORSProxyURL(URL, params) {
+    return `http://127.0.0.1:3000/?${constructURL(URL, params)}`;
 }
 
 export default function fetchWebRPC(projectEndpoint, params, requestOptions) {

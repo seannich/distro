@@ -1,0 +1,32 @@
+{
+    "name": "cors-proxy",
+    "version": "1.0.0",
+    "description": "Proxies requests with BOINC to allow CORS",
+    "main": "app.js",
+    "scripts": {
+        "app": "node app.js"
+    },
+    "repository": "https://github.com/seannich/distro",
+    "authors": [
+        {
+            "name": "Joel Tio",
+            "email": "joeltiojinhon@gmail.com"
+        },
+        {
+            "name": "Sean Nicholas",
+            "email": "seannts9@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "private": false,
+    "devDependencies": {
+        "eslint": "^5.12.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.14.0"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.16.4",
+        "request": "^2.88.0"
+    }
+}
