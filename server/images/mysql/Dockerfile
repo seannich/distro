@@ -1,1 +1,1 @@
-FROM ../../boinc-server-docker/images/mysql
+FROM boinc/server_mysql:4.0.0
