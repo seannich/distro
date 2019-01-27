@@ -1,3 +1,5 @@
+import md5 from 'md5';
+import { j2xParser as ToXMLParser } from 'fast-xml-parser';
 import { getWithProxy, postWithProxyXML } from './webRPC';
 import {
     PLATFORM_NAME, CLIENT_MAJOR_VERSION, CLIENT_MINOR_VERSION,
@@ -5,7 +7,12 @@ import {
     HOST_MEMBW, HOST_CALCULATED, HOST_RAM_BYTES, HOST_CPU_CACHE,
     HOST_SWAP_SPACE, HOST_TOTAL_DISK_SPACE, HOST_AVAIL_DISK_SPACE,
     HOST_NETWORK_BW_DOWN, HOST_NETWORK_BW_UP, WORK_REQ_SECONDS,
+    FILE_UPLOAD_SUFFIX,
 } from './settings';
+
+// Ensure that the XML is formatted (each tag is on a new line) so that the XML
+// parser on the BOINC server can parse the tags.
+const JSONToXMLParser = new ToXMLParser({ format: true });
 
 export function getSchedulerURL(projectURL) {
     return getWithProxy(projectURL)
@@ -56,4 +63,37 @@ export function fetchWork(schedulerURL, authenticator) {
         </scheduler_request>`;
 
     return postWithProxyXML(schedulerURL, payload);
+}
+
+function getUploadFileURL(schedulerURL) {
+    // Remove the "cgi/" part
+    const segments = schedulerURL.split('/');
+
+    // Check for trailing slash
+    if (segments[segments.length - 1] === '') {
+        segments.pop();
+    }
+    segments.pop();
+
+    segments.push(FILE_UPLOAD_SUFFIX);
+    return segments.join('/');
+}
+
+export function uploadFile(schedulerURL, fileInfo, data) {
+    const payload = `
+        <data_server_request>
+            <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
+            <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
+            <core_client_release>1</core_client_release>
+            <file_upload>
+                <file_info>
+                    ${JSONToXMLParser.parse(fileInfo)}
+                </file_info>
+                <nbytes>${data.length}</nbytes>
+                <md5_cksum>${md5(data)}</md5_cksum>
+                <offset>0</offset>
+            <data>\n${data}`;
+
+    const URL = getUploadFileURL(schedulerURL);
+    return postWithProxyXML(URL, payload);
 }

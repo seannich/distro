@@ -13,6 +13,8 @@ export const UPDATE_FORUM_PREF_SUFFIX = 'edit_forum_preferences_action.php';
 export const USER_LAST_FORUM_POST_SUFFIX = 'forum_get_data.php';
 export const APP_VERSIONS_SUFFIX = 'apps.php';
 
+export const FILE_UPLOAD_SUFFIX = 'file_upload_handler';
+
 // Scheduler Host Info settings
 export const PLATFORM_NAME = 'browser';
 export const CLIENT_MAJOR_VERSION = 1;
