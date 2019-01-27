@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Introduction &#8212; distro. 0.0.1 documentation</title>
+    <title>Overview &#8212; distro. 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="License" href="license.html" />
+    <link rel="next" title="Documentation" href="documentation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,11 +33,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-is-distro">
-<h2>What is distro.?<a class="headerlink" href="#what-is-distro" title="Permalink to this headline">¶</a></h2>
-<p>distro. is a project by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas, regarding the donation of computational power.</p>
+<h2>What is distro?<a class="headerlink" href="#what-is-distro" title="Permalink to this headline">¶</a></h2>
+<p>distro is a project by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas, regarding the donation of computational power.</p>
 </div>
 <div class="section" id="what-do-we-do">
 <h2>What do we do?<a class="headerlink" href="#what-do-we-do" title="Permalink to this headline">¶</a></h2>
@@ -50,38 +50,42 @@
 <div class="section" id="how-do-we-do-it">
 <h2>How do we do it?<a class="headerlink" href="#how-do-we-do-it" title="Permalink to this headline">¶</a></h2>
 <p>We run jobs using JavaScript after fetching them from a BOINC server.</p>
+<p>Example 1 of code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i am using distro&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">i</span> <span class="n">am</span> <span class="n">using</span> <span class="n">distro</span>
+</pre></div>
 </div>
-</div>
-<div class="section" id="the-distro-documentation">
-<h1>the distro. documentation<a class="headerlink" href="#the-distro-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This site covers distro.’s usage and API documentation.</p>
-<div class="section" id="getting-started">
-<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>Many core ideas &amp; API calls are explained in the tutorial/getting-started document:</p>
-<p>Here is some text explaining some very complicated stuff.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;hello world&#39;</span>
-<span class="o">&gt;&gt;</span> <span class="n">hello</span> <span class="n">world</span>
+<p>Example 2 of code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;something&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">something</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="guide">
-<h2>Guide:<a class="headerlink" href="#guide" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-boinc-works">
+<h1>How BOINC works:<a class="headerlink" href="#how-boinc-works" title="Permalink to this headline">¶</a></h1>
+<p>The BOINC core client communicates with several servers in the course of getting work and returning results. All communication uses HTTP on port 80, so client can function through firewalls and proxies.</p>
+<ul class="simple">
+<li>The client downloads the page from project’s master URL. From XML tags embedded in this page, it obtains a list of domain names of schedulers.</li>
+<li>The client exchanges request and reply messages with a scheduling server. The reply message contains, among other things, descriptions of work to be performed, and lists of URLs of the input and output files of that work.</li>
+<li>The client downloads files (application programs and data files) from one or more download data servers. This uses standard HTTP GET requests, perhaps with Range commands to resume incomplete transfers.</li>
+<li>After the computation is complete, the client uploads the result files. This uses a BOINC-specific protocol that protects against DOS attacks on data servers.</li>
+<li>The client then contacts a scheduling server again, reporting the completed work and requesting more work.</li>
+</ul>
+<div class="section" id="usage">
+<h2>Usage:<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#getting-started">Getting started</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html#contact">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 </div>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
 </div>
 
 
@@ -102,6 +106,7 @@
 
 <h3>Navigation</h3>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html#contact">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
@@ -111,7 +116,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="license.html" title="next chapter">License</a></li>
+      <li>Next: <a href="documentation.html" title="next chapter">Documentation</a></li>
   </ul></li>
 </ul>
 </div>
