@@ -1,0 +1,6 @@
+<boinc>
+    <platform>
+        <name>browser</name>
+        <user_friendly_name>Any browser</user_friendly_name>
+    </platform>
+</boinc>

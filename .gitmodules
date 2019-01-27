@@ -1,0 +1,3 @@
+[submodule "server/boinc-server-docker"]
+	path = server/boinc-server-docker
+	url = https://github.com/marius311/boinc-server-docker.git
