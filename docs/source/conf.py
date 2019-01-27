@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'distro.'
+project = 'distro'
 copyright = '2019, Joel Tio, Sean Nicholas'
 author = 'Joel Tio, Sean Nicholas'
 
@@ -129,7 +129,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'distro.tex', 'distro. Documentation',
+    (master_doc, 'distro.tex', 'distro Documentation',
      'Joel Tio, Sean Nicholas', 'manual'),
 ]
 
@@ -139,7 +139,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'distro', 'distro. Documentation',
+    (master_doc, 'distro', 'distro Documentation',
      [author], 1)
 ]
 
@@ -150,7 +150,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'distro', 'distro. Documentation',
+    (master_doc, 'distro', 'distro Documentation',
      author, 'distro', 'One line description of project.',
      'Miscellaneous'),
 ]
