@@ -6,7 +6,7 @@ import {
     HOST_NCPUS, HOST_CPU_VENDOR, HOST_CPU_MODEL, HOST_FPOPS, HOST_IOPS,
     HOST_MEMBW, HOST_CALCULATED, HOST_RAM_BYTES, HOST_CPU_CACHE,
     HOST_SWAP_SPACE, HOST_TOTAL_DISK_SPACE, HOST_AVAIL_DISK_SPACE,
-    HOST_NETWORK_BW_DOWN, HOST_NETWORK_BW_UP,
+    HOST_NETWORK_BW_DOWN, HOST_NETWORK_BW_UP, WORK_REQ_SECONDS,
 } from './settings';
 
 export function getSchedulerURL(projectURL) {
@@ -64,9 +64,33 @@ export function createHost(schedulerURL, authenticator) {
     return axios.post(toCORSProxyURL(schedulerURL), payload, {
         crossDomain: true,
     }).then(response => new Promise((resolve, reject) => {
-        // This reponse usually throws an XML parsing error because there may
+        // This response usually throws an XML parsing error because there may
         // be an ampersand in the XML that is not escaped. This error can be
         // ignored as the fast-xml-parser parses the XML fine.
+        if (response.status === 200) {
+            // The response data is XML. Parse the XML into a JavaScript object
+            const data = parser.parse(response.data);
+            resolve(data);
+        } else {
+            reject(response);
+        }
+    }));
+}
+
+export function fetchWork(schedulerURL, authenticator, hostID) {
+    const payload = `
+        <scheduler_request>
+            <platform_name>${PLATFORM_NAME}</platform_name>
+            <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
+            <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
+            <authenticator>${authenticator}</authenticator>
+            <hostid>${hostID}</hostid>
+            <work_req_seconds>${WORK_REQ_SECONDS}</work_req_seconds>
+        </scheduler_request>`;
+
+    return axios.post(toCORSProxyURL(schedulerURL), payload, {
+        crossDomain: true,
+    }).then(response => new Promise((resolve, reject) => {
         if (response.status === 200) {
             // The response data is XML. Parse the XML into a JavaScript object
             const data = parser.parse(response.data);

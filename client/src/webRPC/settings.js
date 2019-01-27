@@ -17,6 +17,7 @@ export const APP_VERSIONS_SUFFIX = 'apps.php';
 export const PLATFORM_NAME = 'browser';
 export const CLIENT_MAJOR_VERSION = 1;
 export const CLIENT_MINOR_VERSION = 0;
+export const WORK_REQ_SECONDS = 2 * 60;
 
 // Faked computer information
 // CPU Information
