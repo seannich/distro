@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import fetchWebRPC from './webRPC';
+import { getXMLWithProxy, postWithProxy } from './webRPC';
 import {
     UPDATE_FORUM_PREF_SUFFIX, USER_LAST_FORUM_POST_SUFFIX,
 } from './settings';
@@ -15,7 +13,7 @@ export function setForumPref(projectURL, accountKey, options) {
         ...options,
     };
 
-    return axios.post(endpoint, payload);
+    return postWithProxy(endpoint, payload);
 }
 
 export function getForumLastPost(projectURL, method, userID, options) {
@@ -26,5 +24,5 @@ export function getForumLastPost(projectURL, method, userID, options) {
         ...options,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }

@@ -1,6 +1,4 @@
-import axios from 'axios';
-import parser from 'fast-xml-parser';
-import { toCORSProxyURL } from './webRPC';
+import { getWithProxy, postWithProxyXML } from './webRPC';
 import {
     PLATFORM_NAME, CLIENT_MAJOR_VERSION, CLIENT_MINOR_VERSION,
     HOST_NCPUS, HOST_CPU_VENDOR, HOST_CPU_MODEL, HOST_FPOPS, HOST_IOPS,
@@ -10,10 +8,8 @@ import {
 } from './settings';
 
 export function getSchedulerURL(projectURL) {
-    return axios.get(toCORSProxyURL(projectURL), {
-        crossDomain: true,
-    }).then(response => new Promise((resolve, reject) => {
-        if (response.status === 200) {
+    return getWithProxy(projectURL)
+        .then(response => new Promise((resolve, reject) => {
             // Try and get the scheduler URL from the HTML comment
             let result = /<head>(?:.|\n)*?<!--(?:.|\n)*?<scheduler>((?:.|\n)*)<\/scheduler>(?:.|\n)*?-->(?:.|\n)*?<\/head>/g.exec(response.data);
             if (result === null) {
@@ -26,10 +22,7 @@ export function getSchedulerURL(projectURL) {
             } else {
                 resolve(result[1]);
             }
-        } else {
-            reject(response);
-        }
-    }));
+        }));
 }
 
 export function createHost(schedulerURL, authenticator) {
@@ -61,20 +54,10 @@ export function createHost(schedulerURL, authenticator) {
             </host_info>
         </scheduler_request>`;
 
-    return axios.post(toCORSProxyURL(schedulerURL), payload, {
-        crossDomain: true,
-    }).then(response => new Promise((resolve, reject) => {
-        // This response usually throws an XML parsing error because there may
-        // be an ampersand in the XML that is not escaped. This error can be
-        // ignored as the fast-xml-parser parses the XML fine.
-        if (response.status === 200) {
-            // The response data is XML. Parse the XML into a JavaScript object
-            const data = parser.parse(response.data);
-            resolve(data);
-        } else {
-            reject(response);
-        }
-    }));
+    // This response usually throws an XML parsing error because there may be
+    // an ampersand in the XML that is not escaped. This error can be ignored
+    // as the fast-xml-parser parses the XML fine.
+    return postWithProxyXML(schedulerURL, payload);
 }
 
 export function fetchWork(schedulerURL, authenticator, hostID) {
@@ -88,15 +71,5 @@ export function fetchWork(schedulerURL, authenticator, hostID) {
             <work_req_seconds>${WORK_REQ_SECONDS}</work_req_seconds>
         </scheduler_request>`;
 
-    return axios.post(toCORSProxyURL(schedulerURL), payload, {
-        crossDomain: true,
-    }).then(response => new Promise((resolve, reject) => {
-        if (response.status === 200) {
-            // The response data is XML. Parse the XML into a JavaScript object
-            const data = parser.parse(response.data);
-            resolve(data);
-        } else {
-            reject(response);
-        }
-    }));
+    return postWithProxyXML(schedulerURL, payload);
 }
