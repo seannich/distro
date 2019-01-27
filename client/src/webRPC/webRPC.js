@@ -12,7 +12,7 @@ function toCORSProxyURL(URL, params) {
 
 function responseToXMLData(response) {
     return new Promise((resolve) => {
-        const data = parser.parse(response);
+        const data = parser.parse(response.data);
         resolve(data);
     });
 }
