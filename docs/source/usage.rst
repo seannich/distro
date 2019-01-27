@@ -1,7 +1,25 @@
 Usage
 =====
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula ultrices porta. Fusce placerat augue porttitor, laoreet arcu eu, malesuada arcu. Aliquam in scelerisque orci, posuere mattis orci. Sed ac dapibus nibh. In elit elit, fringilla sit amet eros a, egestas varius diam. Pellentesque tempus tempus nulla, id blandit libero malesuada non. Donec at aliquam quam. Nunc non rutrum felis. Aenean feugiat ex ante, a dignissim tortor bibendum eget. Donec in lorem vitae lectus faucibus elementum. Nullam sagittis mi et nunc volutpat accumsan.
+This usage guide assumes that you already have a copy of ``distro.min.js``. To
+find out how to build ``distro.min.js``, follow the instructions on the `GitHub
+page <https://github.com/seannich/distro>`_.
 
-Etiam aliquet aliquam orci quis feugiat. Etiam molestie mauris nec blandit rutrum. Nulla mollis consectetur augue, eget sollicitudin nisi aliquet sit amet. Donec quis neque eleifend, venenatis elit id, suscipit tortor. Mauris nulla odio, venenatis sed viverra quis, sollicitudin sit amet mi. Integer ultrices vitae mi vitae sagittis. Sed consectetur mi sed massa interdum blandit. Vivamus sed finibus augue, id placerat augue. Duis quis enim eget magna semper vestibulum eget eu elit. Suspendisse sit amet massa vel lorem pellentesque gravida. Cras blandit bibendum porta. 
+To add distro to your website, all you have to:
+1. Host the file.
+2. Add the file to your website's HTML.
+
+Firstly, you will want to host the ``distro.min.js`` somewhere on your server.
+This can be as simple as putting the file in a certain folder on your server or
+maybe more complex.
+
+Secondly, you will want to add it in the header tag of your website's HTML:
+
+.. code-block:: html
+
+    <head>
+    ...
+        <script src="static/distro.min.js"></script>
+    ...
+    </head>
 
 .. toctree::
