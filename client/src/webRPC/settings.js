@@ -45,9 +45,9 @@ export const HOST_CPU_CACHE = 2 * (2 ** 20);
 // Available swap space
 export const HOST_SWAP_SPACE = 100 * (2 ** 20);
 // Total disk space
-export const HOST_TOTAL_DISK_SPACE = 1 * (1 ** 30);
+export const HOST_TOTAL_DISK_SPACE = 1 * (2 ** 30);
 // Available disk space
-export const HOST_AVAIL_DISK_SPACE = 1 * (1 ** 30);
+export const HOST_AVAIL_DISK_SPACE = 1 * (2 ** 30);
 
 // Network bandwidth information
 // Upload bandwidth
