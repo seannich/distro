@@ -25,13 +25,14 @@ export function getSchedulerURL(projectURL) {
         }));
 }
 
-export function createHost(schedulerURL, authenticator) {
+export function fetchWork(schedulerURL, authenticator) {
     const payload = `
         <scheduler_request>
             <platform_name>${PLATFORM_NAME}</platform_name>
             <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
             <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
             <authenticator>${authenticator}</authenticator>
+            <work_req_seconds>${WORK_REQ_SECONDS}</work_req_seconds>
             <host_info>
                 <conn_frac>0.000000</conn_frac>
                 <on_frac>0.000000</on_frac>
@@ -52,23 +53,6 @@ export function createHost(schedulerURL, authenticator) {
                 <n_bwup>${HOST_NETWORK_BW_UP}</n_bwup>
                 <n_bwdown>${HOST_NETWORK_BW_DOWN}</n_bwdown>
             </host_info>
-        </scheduler_request>`;
-
-    // This response usually throws an XML parsing error because there may be
-    // an ampersand in the XML that is not escaped. This error can be ignored
-    // as the fast-xml-parser parses the XML fine.
-    return postWithProxyXML(schedulerURL, payload);
-}
-
-export function fetchWork(schedulerURL, authenticator, hostID) {
-    const payload = `
-        <scheduler_request>
-            <platform_name>${PLATFORM_NAME}</platform_name>
-            <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
-            <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
-            <authenticator>${authenticator}</authenticator>
-            <hostid>${hostID}</hostid>
-            <work_req_seconds>${WORK_REQ_SECONDS}</work_req_seconds>
         </scheduler_request>`;
 
     return postWithProxyXML(schedulerURL, payload);
