@@ -6,32 +6,21 @@
 Introduction
 ============
 
-What is distro?
----------------
-distro is a programming project by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas regarding the donation of computational power.
+distro is an implementation of the BOINC Client in JavaScript.
 
-What do we do?
---------------
-We make donating computational power to science more convenient unlike the current `Berkeley Open Infrastructure for Network Computing (BOINC) <https://boinc.berkeley.edu/>`_ clients.
+`BOINC (Berkeley Open Infrastructure for Network Computing) <https://boinc.berkeley.edu/>`_. is an open-source
+software for computing using volunteered resources.
 
-Why do we do it?
-----------------
-We did this project because people aren't really willing to download the BOINC client.
+Currently, the BOINC client works like this:
+1. The client fetches new jobs from a scheduling server.
+2. The client runs the jobs (e.g. checking if a number is prime).
+3. The client sends the results back to the server for evaluation.
 
-How do we do it?
-----------------
-We run the jobs using JavaScript after fetching them from a BOINC server.
+distro does all this, but without the need to install the BOINC client. distro
+runs on your browser. Whenever you visit a site with distro, it will use your
+computer to do computation in the background.
 
-Example code 1: ::
-
-	print('something')
-	>> something
-
-Example code 2: ::
-	
-	x = 1
-	print(x)
-	>> 1
+This project is done by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas.
 
 .. toctree::
    :maxdepth: 2
