@@ -1,7 +1,15 @@
 import axios from 'axios';
+import parser from 'fast-xml-parser';
 import { toCORSProxyURL } from './webRPC';
+import {
+    PLATFORM_NAME, CLIENT_MAJOR_VERSION, CLIENT_MINOR_VERSION,
+    HOST_NCPUS, HOST_CPU_VENDOR, HOST_CPU_MODEL, HOST_FPOPS, HOST_IOPS,
+    HOST_MEMBW, HOST_CALCULATED, HOST_RAM_BYTES, HOST_CPU_CACHE,
+    HOST_SWAP_SPACE, HOST_TOTAL_DISK_SPACE, HOST_AVAIL_DISK_SPACE,
+    HOST_NETWORK_BW_DOWN, HOST_NETWORK_BW_UP,
+} from './settings';
 
-export default function getSchedulerURL(projectURL) {
+export function getSchedulerURL(projectURL) {
     return axios.get(toCORSProxyURL(projectURL), {
         crossDomain: true,
     }).then(response => new Promise((resolve, reject) => {
@@ -18,6 +26,51 @@ export default function getSchedulerURL(projectURL) {
             } else {
                 resolve(result[1]);
             }
+        } else {
+            reject(response);
+        }
+    }));
+}
+
+export function createHost(schedulerURL, authenticator) {
+    const payload = `
+        <scheduler_request>
+            <platform_name>${PLATFORM_NAME}</platform_name>
+            <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
+            <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
+            <authenticator>${authenticator}</authenticator>
+            <host_info>
+                <conn_frac>0.000000</conn_frac>
+                <on_frac>0.000000</on_frac>
+                <p_ncpus>${HOST_NCPUS}</p_ncpus>
+                <p_vendor>${HOST_CPU_VENDOR}</p_vendor>
+                <p_model>${HOST_CPU_MODEL}</p_model>
+                <p_fpops>${HOST_FPOPS}</p_fpops>
+                <p_iops>${HOST_IOPS}</p_iops>
+                <p_membw>${HOST_MEMBW}</p_membw>
+                <p_calculated>${HOST_CALCULATED}</p_calculated>
+                <os_name>Mac OS</os_name>
+                <os_version>10.14.2</os_version>
+                <m_nbytes>${HOST_RAM_BYTES}</m_nbytes>
+                <m_cache>${HOST_CPU_CACHE}</m_cache>
+                <m_swap>${HOST_SWAP_SPACE}</m_swap>
+                <d_total>${HOST_TOTAL_DISK_SPACE}</d_total>
+                <d_free>${HOST_AVAIL_DISK_SPACE}</d_free>
+                <n_bwup>${HOST_NETWORK_BW_UP}</n_bwup>
+                <n_bwdown>${HOST_NETWORK_BW_DOWN}</n_bwdown>
+            </host_info>
+        </scheduler_request>`;
+
+    return axios.post(toCORSProxyURL(schedulerURL), payload, {
+        crossDomain: true,
+    }).then(response => new Promise((resolve, reject) => {
+        // This reponse usually throws an XML parsing error because there may
+        // be an ampersand in the XML that is not escaped. This error can be
+        // ignored as the fast-xml-parser parses the XML fine.
+        if (response.status === 200) {
+            // The response data is XML. Parse the XML into a JavaScript object
+            const data = parser.parse(response.data);
+            resolve(data);
         } else {
             reject(response);
         }
