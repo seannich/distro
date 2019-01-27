@@ -35,43 +35,33 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-is-distro">
-<h2>What is distro?<a class="headerlink" href="#what-is-distro" title="Permalink to this headline">¶</a></h2>
-<p>distro is a programming project by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas regarding the donation of computational power.</p>
-</div>
-<div class="section" id="what-do-we-do">
-<h2>What do we do?<a class="headerlink" href="#what-do-we-do" title="Permalink to this headline">¶</a></h2>
-<p>We make donating computational power to science more convenient unlike the current <a class="reference external" href="https://boinc.berkeley.edu/">Berkeley Open Infrastructure for Network Computing (BOINC)</a> clients.</p>
-</div>
-<div class="section" id="why-do-we-do-it">
-<h2>Why do we do it?<a class="headerlink" href="#why-do-we-do-it" title="Permalink to this headline">¶</a></h2>
-<p>We did this project because people aren’t really willing to download the BOINC client.</p>
-</div>
-<div class="section" id="how-do-we-do-it">
-<h2>How do we do it?<a class="headerlink" href="#how-do-we-do-it" title="Permalink to this headline">¶</a></h2>
-<p>We run the jobs using JavaScript after fetching them from a BOINC server.</p>
-<p>Example code 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;something&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;</span> <span class="n">something</span>
-</pre></div>
-</div>
-<p>Example code 2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="o">&gt;&gt;</span> <span class="mi">1</span>
-</pre></div>
-</div>
+<p>distro is an implementation of the BOINC Client in JavaScript.</p>
+<p><a class="reference external" href="https://boinc.berkeley.edu/">BOINC (Berkeley Open Infrastructure for Network Computing)</a>. is an open-source
+software for computing using volunteered resources.</p>
+<p>Currently, the BOINC client works like this:
+1. The client fetches new jobs from a scheduling server.
+2. The client runs the jobs (e.g. checking if a number is prime).
+3. The client sends the results back to the server for evaluation.</p>
+<p>distro does all this, but without the need to install the BOINC client. distro
+runs on your browser. Whenever you visit a site with distro, it will use your
+computer to do computation in the background.</p>
+<p>This project is done by two Ngee Ann Polytechnic students, Joel Tio and Sean Nicholas.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Overview</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="boincworks.html">How BOINC works</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="boincworks.html">How BOINC works</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boincworks.html#accounts">Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boincworks.html#scheduler-servers">Scheduler Servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boincworks.html#input-and-output-files">Input and Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boincworks.html#result-submission">Result Submission</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boincworks.html#validation">Validation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="projectworks.html">How the project works</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="projectworks.html#the-client">The Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projectworks.html#the-client-distro">The Client (distro)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="projectworks.html#the-proxy">The Proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="projectworks.html#the-boinc-server-implementation">The BOINC server implementation</a></li>
 </ul>
@@ -80,7 +70,6 @@
 </ul>
 </li>
 </ul>
-</div>
 </div>
 </div>
 
