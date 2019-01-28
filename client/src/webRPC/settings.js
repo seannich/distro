@@ -15,6 +15,15 @@ export const APP_VERSIONS_SUFFIX = 'apps.php';
 
 export const FILE_UPLOAD_SUFFIX = 'file_upload_handler';
 
+// Result States
+export const RESULT_ERROR_DOWNLOADING = 1;
+export const RESULT_ERROR_COMPUTING = 2;
+export const RESULT_ERROR_COMPUTING_ALT = 3;
+export const RESULT_ERROR_UPLOADING = 4;
+export const RESULT_FILES_UPLOADED = 5;
+export const RESULT_ABORTED = 6;
+export const RESULT_UPLOAD_FAILED = 7;
+
 // Scheduler Host Info settings
 export const PLATFORM_NAME = 'browser';
 export const CLIENT_MAJOR_VERSION = 1;
