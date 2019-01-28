@@ -36,22 +36,21 @@ function generateHostInfo() {
         </host_info>`;
 }
 
-export function getSchedulerURL(projectURL) {
-    return getWithProxy(projectURL)
-        .then(response => new Promise((resolve, reject) => {
-            // Try and get the scheduler URL from the HTML comment
-            let result = /<head>(?:.|\n)*?<!--(?:.|\n)*?<scheduler>((?:.|\n)*)<\/scheduler>(?:.|\n)*?-->(?:.|\n)*?<\/head>/g.exec(response.data);
-            if (result === null) {
-                // Try and get from a link tag
-                result = /<link rel="boinc_scheduler" href="(.*)"/g.exec(response.data);
-            }
+export async function getSchedulerURL(projectURL) {
+    const response = await getWithProxy(projectURL);
+    // Try and get the scheduler URL from the HTML comment
+    let result = /<head>(?:.|\n)*?<!--(?:.|\n)*?<scheduler>((?:.|\n)*)<\/scheduler>(?:.|\n)*?-->(?:.|\n)*?<\/head>/g.exec(response.data);
 
-            if (result === null) {
-                reject(response);
-            } else {
-                resolve(result[1]);
-            }
-        }));
+    if (result === null) {
+        // Try and get from a link tag
+        result = /<link rel="boinc_scheduler" href="(.*)"/g.exec(response.data);
+    }
+
+    if (result !== null) {
+        return result[1];
+    }
+
+    throw new Error(response);
 }
 
 export function fetchWork(schedulerURL, authenticator) {

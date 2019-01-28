@@ -17,42 +17,42 @@ function responseToXMLData(response) {
     });
 }
 
-export function getWithProxy(endpoint, params, requestOptions) {
+export async function getWithProxy(endpoint, params, requestOptions) {
     const URL = toCORSProxyURL(endpoint, params);
 
-    return axios.get(URL, {
+    const response = await axios.get(URL, {
         crossDomain: true,
         ...requestOptions,
-    }).then(response => new Promise((resolve, reject) => {
-        if (response.status === 200) {
-            resolve(response);
-        } else {
-            reject(response);
-        }
-    }));
+    });
+
+    if (response.status === 200) {
+        return response;
+    }
+
+    throw new Error(response);
 }
 
-export function getXMLWithProxy(endpoint, params, requestOptions) {
-    return getWithProxy(endpoint, params, requestOptions)
-        .then(responseToXMLData);
+export async function getXMLWithProxy(endpoint, params, requestOptions) {
+    const response = await getWithProxy(endpoint, params, requestOptions);
+    return responseToXMLData(response);
 }
 
-export function postWithProxy(endpoint, data, postOptions) {
+export async function postWithProxy(endpoint, data, postOptions) {
     const URL = toCORSProxyURL(endpoint);
 
-    return axios.post(URL, data, {
+    const response = await axios.post(URL, data, {
         crossDomain: true,
         ...postOptions,
-    }).then(response => new Promise((resolve, reject) => {
-        if (response.status === 200) {
-            resolve(response);
-        } else {
-            reject(response);
-        }
-    }));
+    });
+
+    if (response.status === 200) {
+        return response;
+    }
+
+    throw new Error(response);
 }
 
-export function postWithProxyXML(endpoint, data, postOptions) {
-    return postWithProxy(endpoint, data, postOptions)
-        .then(responseToXMLData);
+export async function postWithProxyXML(endpoint, data, postOptions) {
+    const response = await postWithProxy(endpoint, data, postOptions);
+    return responseToXMLData(response);
 }
