@@ -4,6 +4,7 @@ USER $BOINC_USER
 
 COPY config.xml $PROJECT_ROOT
 COPY project.xml $PROJECT_ROOT
+COPY templates $PROJECT_ROOT/templates
 COPY apps $PROJECT_ROOT/apps
 
 # The files belong to root
