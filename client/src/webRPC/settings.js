@@ -12,3 +12,56 @@ export const TEAM_MEMBER_LIST_SUFFIX = 'team_email_list.php';
 export const UPDATE_FORUM_PREF_SUFFIX = 'edit_forum_preferences_action.php';
 export const USER_LAST_FORUM_POST_SUFFIX = 'forum_get_data.php';
 export const APP_VERSIONS_SUFFIX = 'apps.php';
+
+export const FILE_UPLOAD_SUFFIX = 'file_upload_handler';
+
+// Result States
+export const RESULT_ERROR_DOWNLOADING = 1;
+export const RESULT_ERROR_COMPUTING = 2;
+export const RESULT_ERROR_COMPUTING_ALT = 3;
+export const RESULT_ERROR_UPLOADING = 4;
+export const RESULT_FILES_UPLOADED = 5;
+export const RESULT_ABORTED = 6;
+export const RESULT_UPLOAD_FAILED = 7;
+
+// Scheduler Host Info settings
+export const PLATFORM_NAME = 'browser';
+export const CLIENT_MAJOR_VERSION = 1;
+export const CLIENT_MINOR_VERSION = 0;
+export const WORK_REQ_SECONDS = 2 * 60;
+
+// Faked computer information
+// CPU Information
+// Number of CPUs
+export const HOST_NCPUS = 1;
+// CPU vendor, usually either "GeniuineIntel" or "AuthenticAMD"
+export const HOST_CPU_VENDOR = 'GenuineIntel';
+// CPU model
+export const HOST_CPU_MODEL = 'Intel(R) Core(TM) i5-7267U CPU @ 3.10GHz';
+// Floating point operations per second (FPOPS)
+export const HOST_FPOPS = 0;
+// Input/output operations per second (IOPS)
+export const HOST_IOPS = 0;
+// Memory bandwidth
+export const HOST_MEMBW = 0;
+// ???
+export const HOST_CALCULATED = 0;
+
+// Memory information
+// Amount of RAM in bytes. Keep it above 1GiB in case any project has minimum
+// RAM requirements
+export const HOST_RAM_BYTES = 4 * (2 ** 30);
+// CPU cache
+export const HOST_CPU_CACHE = 2 * (2 ** 20);
+// Available swap space
+export const HOST_SWAP_SPACE = 100 * (2 ** 20);
+// Total disk space
+export const HOST_TOTAL_DISK_SPACE = 1 * (2 ** 30);
+// Available disk space
+export const HOST_AVAIL_DISK_SPACE = 1 * (2 ** 30);
+
+// Network bandwidth information
+// Upload bandwidth
+export const HOST_NETWORK_BW_UP = 0;
+// Download bandwidth
+export const HOST_NETWORK_BW_DOWN = 0;

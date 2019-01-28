@@ -1,6 +1,6 @@
 import md5 from 'md5';
 
-import fetchWebRPC from './webRPC';
+import { getXMLWithProxy } from './webRPC';
 import {
     CREATE_ACCOUNT_SUFFIX, LOOKUP_ACCOUNT_SUFFIX,
     GET_ACCOUNT_INFO_SUFFIX, SET_ACCOUNT_INFO_SUFFIX,
@@ -26,12 +26,12 @@ export function createAccount(projectURL, emailAddress, password, userName,
         ...options,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function lookupAccount(projectURL, options) {
     const endpoint = `${projectURL}${LOOKUP_ACCOUNT_SUFFIX}`;
-    return fetchWebRPC(endpoint, options);
+    return getXMLWithProxy(endpoint, options);
 }
 
 export function getAccountInfo(projectURL, accountKey, opaqueAuth) {
@@ -41,7 +41,7 @@ export function getAccountInfo(projectURL, accountKey, opaqueAuth) {
         opaque_auth: opaqueAuth,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function setAccountInfo(projectURL, accountKey, opaqueAuth, options) {
@@ -52,7 +52,7 @@ export function setAccountInfo(projectURL, accountKey, opaqueAuth, options) {
         ...options,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function setHostInfo(projectURL, accountKey, opaqueAuth, hostID, venue) {
@@ -64,7 +64,7 @@ export function setHostInfo(projectURL, accountKey, opaqueAuth, hostID, venue) {
         venue,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function showUser(projectURL, opaqueAuth, options) {
@@ -75,5 +75,5 @@ export function showUser(projectURL, opaqueAuth, options) {
         ...options,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }

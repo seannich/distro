@@ -3,4 +3,8 @@
         <name>browser</name>
         <user_friendly_name>Any browser</user_friendly_name>
     </platform>
+    <app>
+        <name>collatz</name>
+        <user_friendly_name>Collatz Conjecture</user_friendly_name>
+    </app>
 </boinc>

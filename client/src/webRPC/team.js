@@ -1,4 +1,4 @@
-import fetchWebRPC from './webRPC';
+import { getXMLWithProxy } from './webRPC';
 import {
     TEAM_LOOKUP_SUFFIX, TEAM_MEMBER_LIST_SUFFIX,
 } from './settings';
@@ -10,7 +10,7 @@ export function teamLookupByName(projectURL, teamName) {
         team_name: teamName,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function teamLookupByID(projectURL, teamID) {
@@ -19,7 +19,7 @@ export function teamLookupByID(projectURL, teamID) {
         team_id: teamID,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
 
 export function getTeamMemberList(projectURL, teamID, opaqueAuth, options) {
@@ -31,5 +31,5 @@ export function getTeamMemberList(projectURL, teamID, opaqueAuth, options) {
         ...options,
     };
 
-    return fetchWebRPC(endpoint, params);
+    return getXMLWithProxy(endpoint, params);
 }
