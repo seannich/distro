@@ -105,6 +105,10 @@
     </tasks>
     <daemons>
         <daemon>
+            <cmd>sample_bitwise_validator --app collatz</cmd>
+            <output>collatz_validator.log</output>
+        </daemon>
+        <daemon>
             <cmd>feeder -d 3 </cmd>
         </daemon>
         <daemon>
