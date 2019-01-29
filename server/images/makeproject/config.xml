@@ -113,6 +113,10 @@
             <output>collatz_validator.log</output>
         </daemon>
         <daemon>
+            <cmd>collatz_work_generator -c 50 --sleep_interval 5 --max_jobs_create 50</cmd>
+            <output>collatz_work_generator.log</output>
+        </daemon>
+        <daemon>
             <cmd>feeder -d 3 </cmd>
         </daemon>
         <daemon>
