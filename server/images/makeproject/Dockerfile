@@ -5,6 +5,7 @@ USER $BOINC_USER
 COPY config.xml $PROJECT_ROOT
 COPY project.xml $PROJECT_ROOT
 COPY apps $PROJECT_ROOT/apps
+COPY py $PROJECT_ROOT/py
 
 # The files belong to root
 USER root
