@@ -35,8 +35,8 @@ class CollatzWorkGenerator(work_generator.WorkGenerator, object):
             return self.start_from
 
     def make_jobs(self, num=1):
+        last_upper_bound = self.get_last_upper_bound()
         for _ in range(num):
-            last_upper_bound = self.get_last_upper_bound()
             command_line = {
                 "min": last_upper_bound,
                 "max": last_upper_bound + self.num_numbers,
@@ -47,6 +47,8 @@ class CollatzWorkGenerator(work_generator.WorkGenerator, object):
             }
 
             create_work(self.appname, args, [])
+
+            last_upper_bound += self.num_numbers
 
 
 if __name__ == "__main__":
