@@ -47,6 +47,11 @@ async function main() {
         // Start the timeout
         delay = requestDelay(workResponse.scheduler_reply.request_delay * 1000);
 
+        // If there is no work sent, wait again and try again
+        if (!("workunit" in workResponse.scheduler_reply)) {
+            continue;
+        }
+
         // Get the main file
         const mainFile = await getMainProgram(workResponse);
         window.eval(mainFile);
