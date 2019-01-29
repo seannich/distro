@@ -53,13 +53,14 @@ export async function getSchedulerURL(projectURL) {
     throw new Error(response);
 }
 
-export function fetchWork(schedulerURL, authenticator) {
+export function fetchWork(schedulerURL, authenticator, hostID) {
     const payload = `
         <scheduler_request>
             <platform_name>${PLATFORM_NAME}</platform_name>
             <core_client_major_version>${CLIENT_MAJOR_VERSION}</core_client_major_version>
             <core_client_minor_version>${CLIENT_MINOR_VERSION}</core_client_minor_version>
             <authenticator>${authenticator}</authenticator>
+            ${hostID ? `<hostid>${hostID}</hostid>` : ''}
             <work_req_seconds>${WORK_REQ_SECONDS}</work_req_seconds>
             ${generateHostInfo()}
         </scheduler_request>`;
