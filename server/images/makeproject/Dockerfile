@@ -7,6 +7,8 @@ COPY project.xml $PROJECT_ROOT
 COPY templates $PROJECT_ROOT/templates
 COPY apps $PROJECT_ROOT/apps
 COPY py $PROJECT_ROOT/py
+COPY bin $PROJECT_ROOT/bin
+COPY results $PROJECT_ROOT/results
 
 # The files belong to root
 USER root

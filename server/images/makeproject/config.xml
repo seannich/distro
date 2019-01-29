@@ -105,6 +105,10 @@
     </tasks>
     <daemons>
         <daemon>
+            <cmd>collatz_assimilator -app collatz</cmd>
+            <output>collatz_assimilator.log</output>
+        </daemon>
+        <daemon>
             <cmd>sample_bitwise_validator --app collatz</cmd>
             <output>collatz_validator.log</output>
         </daemon>

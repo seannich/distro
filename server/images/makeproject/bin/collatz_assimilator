@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+import os
+import lockfile
+
+import boinc_path_config
+from Boinc import assimilator
+
+
+class CollatzAssimilator(assimilator.Assimilator, object):
+    def __init__(self):
+        super(CollatzAssimilator, self).__init__()
+
+        self.csv_file = os.path.join(
+            os.environ["PROJECT_ROOT"], "results", "completed.csv")
+
+    def validate_data_line(self, line):
+        data = line.strip().split(",")
+
+        # Validate data
+        if len(data) != 2:
+            self.logCritical("Bad canonical result file format. More than one "
+                             "comma separated value found.\n")
+            return False
+        elif data[1] not in {"true", "false"}:
+            self.logCritical("Bad canonical result value: second value is not "
+                             "either 'true' or 'false'.\n")
+            return False
+
+        try:
+            int(data[0])
+        except ValueError:
+            self.logCritical("Bad canonical result value: first value is not "
+                             "a number.\n")
+            return False
+
+        return True
+
+    def logDebugWriteFile(self, canonical_result):
+        self.logDebug("Wrote {} into combined results file\n".format(
+            canonical_result.name))
+
+    def assimilate_handler(self, wu, results, canonical_result):
+        # Get the result file
+        canonical_result_file = self.get_file_path(canonical_result)
+
+        with lockfile.LockFile(self.csv_file):
+            with open(self.csv_file, "a") as combined_results_file:
+                with open(canonical_result_file, "r") as result_file:
+                    for line in result_file:
+                        if not self.validate_data_line(line):
+                            return
+
+                        # Write the value into the common file
+                        combined_results_file.write(line + "\n")
+
+                    self.logDebugWriteFile(canonical_result)
+
+
+if __name__ == '__main__':
+    asm = CollatzAssimilator()
+    asm.run()
