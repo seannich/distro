@@ -36,7 +36,7 @@ class CollatzAssimilator(assimilator.Assimilator, object):
         return True
 
     def logDebugWriteFile(self, canonical_result):
-        self.logDebug("Wrote {} into combined results file\n".format(
+        self.logNormal("Wrote {} into combined results file\n".format(
             canonical_result.name))
 
     def assimilate_handler(self, wu, results, canonical_result):
