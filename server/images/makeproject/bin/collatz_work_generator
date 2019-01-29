@@ -1,0 +1,12 @@
+import boinc_project_config
+from Boinc import work_generator
+
+
+class CollatzWorkGenerator(work_generator.WorkGenerator, object):
+    def __init__(self):
+        super(CollatzWorkGenerator, self).__init__("collatz")
+
+
+if __name__ == "__main__":
+    work_generator = CollatzWorkGenerator()
+    work_generator.run()
