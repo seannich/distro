@@ -17,14 +17,14 @@ class WorkGenerator(object):
     def __init__(self, appname):
         parser = self.parser = argparse.ArgumentParser(prog='work_generator')
         parser.add_argument(
-            '-c', '--cushion', nargs=1, default=2000, type=int,
+            '-c', '--cushion', nargs=1, default=[2000], type=int,
             help='number of jobs to keep available')
         parser.add_argument(
-            '-mjc', '--max_jobs_create', nargs=1, default=50, type=int,
+            '-mjc', '--max_jobs_create', nargs=1, default=[50], type=int,
             help=('maximum number jobs to create in one pass, before waiting '
                   'for transitioner'))
         parser.add_argument(
-            '-si', '--sleep_interval', nargs=1, default=5, type=int,
+            '-si', '--sleep_interval', nargs=1, default=[5], type=int,
             help='how many seconds to sleep between passes')
         parser.add_argument(
             '-d', '--debug', action='store_true', default=False,
@@ -61,7 +61,7 @@ class WorkGenerator(object):
                 dbconnection.commit()
                 app = database.Apps.find1(name=self.appname)
                 num_unsent = database.Results.count(
-                    app=app, server_state='RESULT_SERVER_STATE_UNSENT')
+                    app=app, server_state=RESULT_SERVER_STATE_UNSENT)
 
                 if num_unsent < self.args['cushion'][0]:
 
