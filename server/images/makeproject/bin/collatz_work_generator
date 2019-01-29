@@ -1,4 +1,4 @@
-import boinc_project_config
+import boinc_path_config
 from Boinc import work_generator
 
 
