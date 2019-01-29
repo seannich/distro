@@ -44,7 +44,7 @@ class WorkGenerator(object):
         pass
 
     @abstractmethod
-    def make_jobs(self):
+    def make_jobs(self, num=1):
         raise NotImplementedError()
 
     def run(self):
