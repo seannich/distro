@@ -80,4 +80,4 @@ def read_create_work_args(args):
     """
     if isinstance(args,argparse.Namespace): args=vars(args)
     cwargs = {k:v for k,v in args.items() if k in create_work_args and v is not None}
-return cwargs
+    return cwargs
