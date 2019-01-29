@@ -19,6 +19,12 @@ async function getMainProgram(workResponse) {
     throw new Error('There is no main program in the workResponse');
 }
 
+async function requestDelay(seconds) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, seconds);
+    });
+}
+
 // Create an account
 async function main() {
     const schedulerURL = await getSchedulerURL(projectURL);
@@ -27,19 +33,35 @@ async function main() {
         projectURL, 'blahblah@gmail.com', 'password', 'blah', true, 'web',
     );
 
-    const workResponse = await fetchWork(schedulerURL, authenticator);
+    let delay = requestDelay(0);
+    let hostID;
+    while (true) {
+        await delay;
+        let workResponse;
+        if (hostID === undefined) {
+            workResponse = await fetchWork(schedulerURL, authenticator);
+        } else {
+            workResponse = await fetchWork(schedulerURL, authenticator, hostID);
+        }
 
-    // Get the main file
-    const mainFile = await getMainProgram(workResponse);
-    window.eval(mainFile);
-    const result = window.jobMain(workResponse.scheduler_reply.workunit.command_line);
+        // Start the timeout
+        delay = requestDelay(workResponse.scheduler_reply.request_delay * 1000);
 
-    const fileInfo = workResponse.scheduler_reply.file_info[1];
-    const hostID = workResponse.scheduler_reply.hostid;
-    const taskName = workResponse.scheduler_reply.result.name;
+        // Get the main file
+        const mainFile = await getMainProgram(workResponse);
+        window.eval(mainFile);
+        const result = window.jobMain(workResponse.scheduler_reply.workunit.command_line);
 
-    await uploadFile(schedulerURL, fileInfo, result);
-    sendWork(schedulerURL, authenticator, hostID, taskName, [fileInfo]);
+        const fileInfo = workResponse.scheduler_reply.file_info[1];
+        const newHostID = workResponse.scheduler_reply.hostid;
+        if (newHostID !== undefined) {
+            hostID = newHostID;
+        }
+        const taskName = workResponse.scheduler_reply.result.name;
+
+        await uploadFile(schedulerURL, fileInfo, result);
+        await sendWork(schedulerURL, authenticator, hostID, taskName, [fileInfo]);
+    }
 }
 
 main();
