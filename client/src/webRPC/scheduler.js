@@ -53,7 +53,7 @@ export async function getSchedulerURL(projectURL) {
     throw new Error(response);
 }
 
-export function fetchWork(schedulerURL, authenticator, hostID) {
+export async function fetchWork(schedulerURL, authenticator, hostID) {
     const payload = `
         <scheduler_request>
             <platform_name>${PLATFORM_NAME}</platform_name>
@@ -66,6 +66,12 @@ export function fetchWork(schedulerURL, authenticator, hostID) {
         </scheduler_request>`;
 
     return postWithProxyXML(schedulerURL, payload);
+}
+
+export async function getFile(fileInfo) {
+    // TODO: check the file signature
+    const response = await getWithProxy(fileInfo.url);
+    return response.data;
 }
 
 function getUploadFileURL(schedulerURL) {
