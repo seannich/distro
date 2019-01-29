@@ -51,7 +51,7 @@ class CollatzAssimilator(assimilator.Assimilator, object):
                             return
 
                         # Write the value into the common file
-                        combined_results_file.write(line + "\n")
+                        combined_results_file.write(line)
 
                     self.logDebugWriteFile(canonical_result)
 
