@@ -1,6 +1,7 @@
 import boinc_path_config
 from Boinc import work_generator
 
+from create_work import create_work
 
 class CollatzWorkGenerator(work_generator.WorkGenerator, object):
     def __init__(self):
@@ -10,3 +11,10 @@ class CollatzWorkGenerator(work_generator.WorkGenerator, object):
 if __name__ == "__main__":
     work_generator = CollatzWorkGenerator()
     work_generator.run()
+
+class CollatzWorkGenerator(work_generator.WorkGenerator, object):
+    def __init__(self):
+        super(CollatzWorkGenerator, self).__init__("collatz")
+
+    def make_jobs(self, num=1):
+        pass
